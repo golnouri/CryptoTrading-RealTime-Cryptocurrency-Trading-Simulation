@@ -261,4 +261,5 @@ It is a small practical project for learning and demonstrating:
 
 ## License
 
-This project is available for educational and demonstration purposes.
+© Mojtaba Golnouri  
+GitHub: https://github.com/golnouri
