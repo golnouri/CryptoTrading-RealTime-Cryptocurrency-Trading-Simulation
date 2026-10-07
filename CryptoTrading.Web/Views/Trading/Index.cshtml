@@ -1,0 +1,119 @@
+﻿@model List<CryptoTrading.Domain.Entities.Order>
+
+@{
+    var buyOrders = Model
+        .Where(x => x.Type == CryptoTrading.Domain.Enums.OrderType.Buy)
+        .OrderByDescending(x => x.Price)
+        .ToList();
+
+    var sellOrders = Model
+        .Where(x => x.Type == CryptoTrading.Domain.Enums.OrderType.Sell)
+        .OrderBy(x => x.Price)
+        .ToList();
+
+    var maxBuyQuantity = buyOrders.Any()
+        ? buyOrders.Max(x => x.Quantity)
+        : 1;
+
+    var maxSellQuantity = sellOrders.Any()
+        ? sellOrders.Max(x => x.Quantity)
+        : 1;
+}
+
+<h2>USDT / IRR</h2>
+
+<hr />
+
+<div>
+    <h4>سفارش‌های خرید</h4>
+
+    <table id="buyOrdersTable" class="table">
+        <thead>
+            <tr>
+                <th>قیمت</th>
+                <th>مقدار USDT</th>
+                <th>تاریخ</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var order in buyOrders)
+            {
+                <tr>
+                    <td>@order.Price</td>
+
+                    <td>
+                        <div style="display:flex; align-items:center; gap:10px;">
+
+                            <span>@order.Quantity</span>
+
+                            <div style="width:150px; height:10px; background:#eee;">
+                                <div style="
+                                        width:@((order.Quantity / maxBuyQuantity) * 100)%;
+                                        height:100%;
+                                        background:green;">
+                                </div>
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>@order.CreatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<hr />
+
+<div>
+    <h4>سفارش‌های فروش</h4>
+
+    <table id="sellOrdersTable" class="table">
+        <thead>
+            <tr>
+                <th>قیمت</th>
+                <th>مقدار USDT</th>
+                <th>تاریخ</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var order in sellOrders)
+            {
+                <tr>
+                    <td>@order.Price</td>
+
+                    <td>
+                        <div style="display:flex; align-items:center; gap:10px;">
+
+                            <span>@order.Quantity</span>
+
+                            <div style="width:150px; height:10px; background:#eee;">
+                                <div style="
+                                        width:@((order.Quantity / maxSellQuantity) * 100)%;
+                                        height:100%;
+                                        background:red;">
+                                </div>
+                            </div>
+
+                        </div>
+                    </td>
+
+                    <td>@order.CreatedAt</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<hr />
+
+<a asp-controller="Trading"
+   asp-action="Order"
+   class="btn btn-primary">
+    ثبت سفارش
+</a>
+
+

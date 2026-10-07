@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CryptoTrading.Application/CryptoTrading.Application.csproj" />
+  <Project Path="CryptoTrading.Domain/CryptoTrading.Domain.csproj" />
+  <Project Path="CryptoTrading.Infrastructure/CryptoTrading.Infrastructure.csproj" />
+  <Project Path="CryptoTrading.Web/CryptoTrading.Web.csproj" />
+</Solution>
